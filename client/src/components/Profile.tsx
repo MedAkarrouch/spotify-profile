@@ -1,4 +1,4 @@
-const Profilte = () => {
+const Profile = () => {
   return (
     <>
       <h1>Display your Spotify profile data</h1>
@@ -30,4 +30,4 @@ const Profilte = () => {
   )
 }
 
-export default Profilte
+export default Profile

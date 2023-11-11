@@ -3,11 +3,6 @@ import queryString from "querystring"
 
 import { generateRandomString } from "../utils/utils.js"
 
-const clientId = "2ad0f4cbf0bc45f9ae3d632e30070eb0"
-const clientSecret = "e4ec51b2bd9a4ee4b6981c10136f55cf"
-const clientURL = "http://localhost:5173"
-const redirectUri = `http://localhost:5173/callback`
-
 export const login = (req, res, next) => {
   const state = generateRandomString(16)
   const scope =
@@ -18,9 +13,9 @@ export const login = (req, res, next) => {
     "https://accounts.spotify.com/authorize?" +
     queryString.stringify({
       response_type: "code",
-      client_id: clientId,
+      client_id: process.env.clientId,
       scope,
-      redirect_uri: redirectUri,
+      redirect_uri: process.env.redirectUri,
       state
     })
   res.status(200).json({
@@ -28,7 +23,9 @@ export const login = (req, res, next) => {
     url
   })
 }
+
 export const logout = (req, res, next) => {}
+
 export const callback = async (req, res, next) => {
   const { code, state, error } = req.query
   const originalState = req.cookies.stateKey
@@ -48,14 +45,16 @@ export const callback = async (req, res, next) => {
       url: "https://accounts.spotify.com/api/token",
       data: queryString.stringify({
         code: code,
-        redirect_uri: redirectUri,
+        redirect_uri: process.env.redirectUri,
         grant_type: "authorization_code"
       }),
       headers: {
         "content-type": "application/x-www-form-urlencoded",
         Authorization:
           "Basic " +
-          new Buffer.from(clientId + ":" + clientSecret).toString("base64")
+          new Buffer.from(
+            process.env.clientId + ":" + process.env.clientSecret
+          ).toString("base64")
       },
       json: true
     }
@@ -63,6 +62,13 @@ export const callback = async (req, res, next) => {
       headers: authOptions.headers
     })
     const data = response.data
+    console.log("Data", data)
+    res.cookie("access-token", data["access_token"], {
+      expires: new Date(Date.now() + data.expires_in)
+    })
+    res.cookie("refresh_token", data["refresh_token"], {
+      expires: new Date(Date.now() + data.expires_in)
+    })
     res.status(200).json({ status: "success", data })
   } catch (err) {
     console.log("message = ", err.message)

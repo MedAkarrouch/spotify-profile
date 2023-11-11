@@ -1,0 +1,17 @@
+.btn {
+  cursor: pointer;
+  border: none;
+  &--login {
+    text-transform: uppercase;
+    padding: 1.7rem 3.5rem;
+    background-color: var(--green-color);
+    color: var(--white-color);
+    border-radius: 50px;
+    font-weight: 700;
+  }
+}
+.link {
+  cursor: pointer;
+  &--pageNotAvailable {
+  }
+}

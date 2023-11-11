@@ -1,7 +1,9 @@
 // Variables
-$green: #1db954;
-$white: #ffffff;
-$black: #191414;
+:root {
+  --green-color: #1db954;
+  --white-color: #ffffff;
+  --black-color: #191414;
+}
 //
 *,
 *::after,
@@ -17,4 +19,5 @@ html {
 body {
   font-family: sans-serif;
   font-size: 1.8rem;
+  color: var(--white-color);
 }
