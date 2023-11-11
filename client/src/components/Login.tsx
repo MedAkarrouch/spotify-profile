@@ -1,9 +1,20 @@
-import { Link } from "react-router-dom"
-import { getUrl } from "../utils/utils"
+import axios from "axios"
+const config = {
+  headers: { "Content-Type": "application/json" },
+  withCredentials: true
+}
 
 const Login = () => {
-  const url = getUrl()
-  return <Link to={url}>Login</Link>
+  const login = async () => {
+    const res = await axios.get(
+      `${import.meta.env.VITE_API}/auth/login`,
+      config
+    )
+    const url = res.data.url
+    window.location.href = url
+  }
+
+  return <button onClick={login}>Login</button>
 }
 
 export default Login
