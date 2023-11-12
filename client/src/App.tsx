@@ -4,6 +4,7 @@ import AppLayout from "./components/AppLayout"
 import Callback from "./features/auth/Callback"
 import Home from "./components/Home"
 import PageNotAvailable from "./components/PageNotAvailable"
+import Test from "./components/Test"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,11 +18,10 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/callback" element={<Callback />} />
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/callback" element={<Callback />} />
           <Route path="/pageNotAvailable" element={<PageNotAvailable />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>

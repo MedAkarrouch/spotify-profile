@@ -1,13 +1,17 @@
 import Button from "../ui/Button"
+import Logo from "./Logo"
 import styles from "./PageNotAvailable.module.scss"
-import spotifyLogo from "../../public/spotify.png"
 const PageNotAvailable = () => {
   return (
     <div className={styles.container}>
-      <img src={spotifyLogo} alt="spotify logo" />
-      <h1>Page not available</h1>
-      <p>Something went wrong</p>
-      <Button type="pageNotAvailable">Home</Button>
+      <div className={styles.content}>
+        <Logo />
+        <h1>Page not available</h1>
+        <p>Something went wrong, please try again later.</p>
+        <Button to="/" type="pageNotAvailable">
+          Home
+        </Button>
+      </div>
     </div>
   )
 }

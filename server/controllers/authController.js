@@ -16,7 +16,8 @@ export const login = (req, res, next) => {
       client_id: process.env.clientId,
       scope,
       redirect_uri: process.env.redirectUri,
-      state
+      state,
+      show_dialog: true
     })
   res.status(200).json({
     status: "success",
@@ -29,15 +30,13 @@ export const logout = (req, res, next) => {}
 export const callback = async (req, res, next) => {
   const { code, state, error } = req.query
   const originalState = req.cookies.stateKey
-  // console.log(req.cookies.stateKey)
-  // console.log(state)
-  // console.log(req.query)
-  // const isError = error || !state | !originalState | (state !== originalState)
-  // if (isError)
-  //   return res.status(401).json({
-  //     status: "error",
-  //     message: "Invalid state"
-  //   })
+  console.log({ code, state, error, originalState })
+  const isError = error || !state | !originalState | (state !== originalState)
+  if (isError)
+    return res.status(401).json({
+      status: "error",
+      message: "Invalid state"
+    })
   // else
   res.clearCookie("stateKey")
   try {
@@ -62,13 +61,7 @@ export const callback = async (req, res, next) => {
       headers: authOptions.headers
     })
     const data = response.data
-    console.log("Data", data)
-    res.cookie("access-token", data["access_token"], {
-      expires: new Date(Date.now() + data.expires_in)
-    })
-    res.cookie("refresh_token", data["refresh_token"], {
-      expires: new Date(Date.now() + data.expires_in)
-    })
+    res.cookie("token", JSON.stringify(data))
     res.status(200).json({ status: "success", data })
   } catch (err) {
     console.log("message = ", err.message)
@@ -77,6 +70,4 @@ export const callback = async (req, res, next) => {
       err
     })
   }
-  // if (error) return res.send(error)
-  // if (!state || !originalState || stat/e !== originalState)
 }

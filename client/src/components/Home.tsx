@@ -2,7 +2,7 @@ import Login from "../features/auth/Login"
 import Profile from "./Profile"
 
 const Home = () => {
-  const isLoggedIn = true
+  const isLoggedIn = false
   if (isLoggedIn) return <Profile />
   if (!isLoggedIn) return <Login />
 }

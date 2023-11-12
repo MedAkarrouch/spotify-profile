@@ -12,6 +12,13 @@
 }
 .link {
   cursor: pointer;
+  text-decoration: none;
   &--pageNotAvailable {
+    padding: 1.4rem 3.2rem;
+    background-color: var(--white-color);
+    border-radius: 40px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--black-color);
   }
 }
