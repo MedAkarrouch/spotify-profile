@@ -8,17 +8,11 @@ const Login = () => {
   const { login, isLoading } = useLogin()
   return (
     <section className={styles.container}>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <Logo />
-          <h1>Spotify Profile</h1>
-          <Button type="login" onClick={login}>
-            Login to spotify
-          </Button>
-        </>
-      )}
+      <Logo />
+      <h1>Spotify Profile</h1>
+      <Button type="login" onClick={login}>
+        Login to spotify
+      </Button>
     </section>
   )
 }

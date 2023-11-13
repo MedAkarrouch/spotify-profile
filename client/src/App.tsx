@@ -1,30 +1,22 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import AppLayout from "./components/AppLayout"
-import Callback from "./features/auth/Callback"
-import Home from "./components/Home"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { Navigate } from "react-router-dom"
+import Login from "./features/auth/Login"
 import PageNotAvailable from "./components/PageNotAvailable"
-import Test from "./components/Test"
+import Home from "./components/Home"
+import AppLayout from "./components/AppLayout"
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 0
-    }
-  }
-})
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AppLayout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/callback" element={<Callback />} />
-          <Route path="/pageNotAvailable" element={<PageNotAvailable />} />
-          <Route path="/test" element={<Test />} />
-        </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
+          <Route path="/callback" element={<Navigate replace to="/login" />} />
+          <Route path="*" element={<PageNotAvailable />} />
+          <Route index path="/login" element={<Login />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

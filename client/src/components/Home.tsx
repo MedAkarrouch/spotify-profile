@@ -1,10 +1,10 @@
-import Login from "../features/auth/Login"
-import Profile from "./Profile"
-
 const Home = () => {
-  const isLoggedIn = false
-  if (isLoggedIn) return <Profile />
-  if (!isLoggedIn) return <Login />
+  return (
+    <div>
+      <h1>Home</h1>
+      <h2>Successfully logged in</h2>
+    </div>
+  )
 }
 
 export default Home

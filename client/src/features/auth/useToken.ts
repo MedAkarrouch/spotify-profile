@@ -1,19 +1,13 @@
 import { useMutation } from "@tanstack/react-query"
-import { callback as callbackApi } from "../../api/authApi"
 import { useEffect } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import { setTokens } from "../../api/authApi"
 export const useToken = () => {
   const [searchParams] = useSearchParams()
-  const code = searchParams.get("code") || ""
-  const state = searchParams.get("state") || ""
-  const error = searchParams.get("error") || ""
+  const code = searchParams.get("code")
   const navigate = useNavigate()
   const { mutate: auth } = useMutation({
-    mutationFn: () => callbackApi({ state, code, error }),
-    onSettled: () => navigate("/", { replace: true })
+    // mutationFn: () => setTokens(code)
+    // onError : ()=>
   })
-
-  useEffect(() => {
-    auth()
-  }, [])
 }

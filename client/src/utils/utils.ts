@@ -3,7 +3,10 @@ export const config = {
   withCredentials: true
 }
 export const api = import.meta.env.VITE_API
-export const spotifyApi = import.meta.env.SpotifyApi
+export const scope = import.meta.env.VITE_SCOPE
+export const clientId = import.meta.env.VITE_CLIENT_ID
+export const spotifyApi = import.meta.env.VITE_SPOTIFY_API
+export const redirectURI = import.meta.env.VITE_REDIRECT_URI
 export const getSpotifyApiConfig = (token: string) => {
   return {
     headers: {
@@ -13,22 +16,24 @@ export const getSpotifyApiConfig = (token: string) => {
   }
 }
 
-// Code verifier
-export const generateRandomString = (length: number): string => {
-  const possible =
+export const generateCodeVerifier = (length: number): string => {
+  let text = ""
+  let possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-  const values = crypto.getRandomValues(new Uint8Array(length))
-  return values.reduce((acc, x) => acc + possible[x % possible.length], "")
+
+  for (let i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length))
+  }
+  return text
 }
-// Code challenge
-export const sha256 = async (plain: string): Promise<ArrayBuffer> => {
-  const encoder = new TextEncoder()
-  const data = encoder.encode(plain)
-  return window.crypto.subtle.digest("SHA-256", data)
-}
-export const base64encode = (input: ArrayBuffer): string => {
-  return btoa(String.fromCharCode(...new Uint8Array(input)))
-    .replace(/=/g, "")
+
+export const generateCodeChallenge = async (
+  codeVerifier: string
+): Promise<string> => {
+  const data = new TextEncoder().encode(codeVerifier)
+  const digest = await window.crypto.subtle.digest("SHA-256", data)
+  return btoa(String.fromCharCode.apply(null, [...new Uint8Array(digest)]))
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
+    .replace(/=+$/, "")
 }
