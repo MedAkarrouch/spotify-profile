@@ -1,6 +1,6 @@
 import Button from "../ui/Button"
 import Logo from "./Logo"
-import styles from "./PageNotAvailable.module.scss"
+import styles from "../styles/PageNotAvailable.module.scss"
 const PageNotAvailable = () => {
   return (
     <div className={styles.container}>

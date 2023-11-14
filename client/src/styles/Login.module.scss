@@ -1,0 +1,23 @@
+.container {
+  // background-color: var(--black-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // height: 100vh;
+  padding-top: 30vh;
+  flex-direction: column;
+  gap: 2.5rem;
+  h1 {
+    font-size: 3rem;
+  }
+  button {
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 1.7rem 3.5rem;
+    background-color: var(--green-color);
+    color: var(--white-color);
+    border-radius: 50px;
+    font-weight: 700;
+  }
+}

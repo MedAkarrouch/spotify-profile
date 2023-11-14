@@ -1,5 +1,6 @@
 import { ReactNode } from "react"
-import styles from "./Button.module.scss"
+import { motion } from "framer-motion"
+import styles from "../styles/Button.module.scss"
 import { Link } from "react-router-dom"
 type RegularBtn = {
   onClick?: () => void
@@ -27,12 +28,13 @@ const Button = ({
       </Link>
     )
   return (
-    <button
+    <motion.button
+      layout
       onClick={onClick}
       className={`${styles.btn} ${styles[`btn--${type}`]}`}
     >
       {children}
-    </button>
+    </motion.button>
   )
 }
 
