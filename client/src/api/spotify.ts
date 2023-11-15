@@ -7,7 +7,8 @@ import {
   generateCodeChallenge,
   generateCodeVerifier,
   getSpotifyApiConfig,
-  redirectURI
+  redirectURI,
+  api
 } from "../utils/utils"
 
 export const getAuthLink = async (): Promise<string> => {
@@ -28,7 +29,7 @@ export const getAuthLink = async (): Promise<string> => {
 }
 export const setTokens = async (code: string): Promise<void> => {
   const verifier = localStorage.getItem("verifier")
-  if (!verifier) return
+  if (!verifier) throw new Error("Verifier not found")
 
   localStorage.removeItem("verifier")
 
@@ -36,7 +37,7 @@ export const setTokens = async (code: string): Promise<void> => {
   params.append("client_id", clientId)
   params.append("grant_type", "authorization_code")
   params.append("code", code)
-  params.append("redirect_uri", "http://localhost:5173/callback")
+  params.append("redirect_uri", redirectURI)
   params.append("code_verifier", verifier)
   const result = await axios.post(
     "https://accounts.spotify.com/api/token",
@@ -70,7 +71,7 @@ export const getMe = async (code: string | null) => {
       )
       return res.data
     }
-    if (!code && !token) return null
+    return null
   } catch {
     return null
   }
@@ -83,43 +84,31 @@ const getToken = (token: string): string | null => {
 export const getAccessToken = () => getToken("accessToken")
 export const getRefreshToken = () => getToken("refreshToken")
 
-// import axios from "axios"
-// import { config, api, spotifyApi, getSpotifyApiConfig } from "../utils/utils"
-// type callbackFnParams = {
-//   code: string
-//   state: string
-//   error: string
-// }
-// export const login = async (): Promise<string> => {
-//   const res = await axios.get(`${api}/auth/login`, config)
-//   const url = res.data.url
-//   return url
-// }
-// export const callback = async ({
-//   code,
-//   state,
-//   error
-// }: callbackFnParams): Promise<void> =>
-//   await axios.get(
-//     `${api}/auth/callback?code=${code}&state=${state}&error${error}`,
-//     config
-//   )
+//Profile
+export const getFollowedArtists = async () => {
+  const token = getAccessToken()
+  if (!token) return null
+  try {
+    const res = await axios.get(
+      `${spotifyApi}/me/following?type=artist`,
+      getSpotifyApiConfig(token)
+    )
+    return res.data.artists
+  } catch {
+    return null
+  }
+}
 
-// export const getToken = async ({
-//   code,
-//   state,
-//   error
-// }: callbackFnParams): Promise<void> =>
-//   await axios.get(
-//     `${api}/auth/callback?code${code}&state=${state}&error${error}`,
-//     config
-//   )
-// type getMePropsType = {
-//   token: string
-// }
-// export const getMe = async ({ token }: getMePropsType) => {
-//   try {
-//     const res = await axios.get(`${spotifyApi}/me`, getSpotifyApiConfig(token))
-//     return res.data
-//   } catch (err) {}
-// }
+// Recent Played tracks
+export const getRecentPlayedTracks = async (pageUrl: string) => {
+  const token = getAccessToken()
+  if (!token) return null
+
+  try {
+    const res = await axios.get(pageUrl, getSpotifyApiConfig(token))
+    // console.log("Res = ", res)
+    return res.data
+  } catch {
+    return null
+  }
+}

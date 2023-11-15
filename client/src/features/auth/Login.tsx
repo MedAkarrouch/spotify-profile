@@ -17,9 +17,7 @@ const Login = () => {
     <div className={styles.container}>
       <Logo />
       <h1>Spotify Profile</h1>
-      <motion.button onClick={() => login()}>
-        {isLoading ? "Loading..." : "Login to spotify"}
-      </motion.button>
+      <button onClick={() => login()}>Login to spotify</button>
     </div>
   )
 }

@@ -1,3 +1,44 @@
 .navbar {
   height: 100vh;
+  &__logo {
+    text-align: center;
+  }
+}
+.line {
+  background-color: var(--primary-green-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+}
+.navlist {
+  display: flex;
+  flex-direction: column;
+  li {
+    list-style: none;
+    //  / background-color: ;
+  }
+  a {
+    position: relative;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 1.5rem 0;
+    &:hover,
+    &:visited,
+    &:global(.active) {
+      background-color: var(--secondary-black-color);
+    }
+  }
+  svg {
+    width: 3rem;
+    height: 3rem;
+    // fill: var(--primary-green-color);
+  }
+  span {
+    font-size: 1.2rem;
+  }
 }

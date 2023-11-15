@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query"
-import { getAuthLink } from "../../api/authApi"
+import { getAuthLink } from "../../api/spotify"
 
 export const useLogin = () => {
   const { mutate: login, isPending: isLoading } = useMutation({

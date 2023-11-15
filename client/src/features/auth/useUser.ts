@@ -1,24 +1,20 @@
-import { useEffect } from "react"
 import { useQuery } from "@tanstack/react-query"
-import { getMe } from "../../api/authApi"
+import { getMe } from "../../api/spotify"
 import { useSearchParams } from "react-router-dom"
 
 export const useUser = () => {
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const code = searchParams.get("code")
-  console.log(code)
-  const {
-    isLoading,
-    data: user,
-    refetch: refetchUser
-  } = useQuery({
+  if (searchParams.has("error")) {
+    const updatedSearchParams = new URLSearchParams(searchParams)
+    updatedSearchParams.delete("error")
+    setSearchParams(updatedSearchParams)
+  }
+  const { isLoading, data: user } = useQuery({
     queryKey: ["user"],
     queryFn: async () => getMe(code),
     retry: false
   })
-  useEffect(() => {
-    refetchUser()
-  }, [code])
 
   return { isLoading, user, isAuthenticated: user ? true : false }
 }

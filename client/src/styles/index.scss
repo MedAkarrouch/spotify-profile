@@ -4,6 +4,16 @@
   --white-color: #ffffff;
   --black-color: #191414;
   --black-color--secondary: #121212;
+  // Black
+  --primary-black-color: #000000;
+  --secondary-black-color: #181818;
+  // White
+  --primary-white-color: #ffffff;
+  --secondary-white-color: #f2f2f2;
+  // Green
+  --primary-green-color: #1db954;
+  //
+  --profile-header-color: #535353;
 }
 //
 *,
@@ -19,12 +29,34 @@ html {
 }
 body {
   font-family: sans-serif;
-  font-size: 1.8rem;
-  color: var(--white-color);
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--primary-white-color);
+  background-color: var(--primary-black-color);
+}
+#root {
   min-height: 100vh;
-  background-color: var(--black-color);
   &:has(nav) {
     display: grid;
-    grid-template-columns: 40rem 1fr;
+    grid-template-columns: 10rem 1fr;
+    nav {
+      background-color: var(--primary-black-color);
+      position: sticky;
+      left: 0;
+      width: 100%;
+      top: 0;
+      padding: 2rem 0;
+      grid-column: 1/2;
+      display: flex;
+      flex-direction: column;
+      justify-items: center;
+      gap: 5rem;
+      box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
+    }
+    main {
+      padding: 2rem;
+      background-color: var(--secondary-black-color);
+      height: 200vh;
+    }
   }
 }
