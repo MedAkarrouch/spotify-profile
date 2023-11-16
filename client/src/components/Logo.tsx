@@ -4,8 +4,8 @@ const Logo = () => {
   return (
     <Link to="/profile">
       <svg
-        width="6.2rem"
-        height="6.2rem"
+        width="5.2rem"
+        height="5.2rem"
         viewBox="0 0 60 60"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

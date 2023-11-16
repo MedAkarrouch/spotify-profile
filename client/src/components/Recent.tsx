@@ -1,13 +1,16 @@
 import { getRecentPlayedTracks } from "../api/spotify"
 import { useRecentPlayedTracks } from "../hooks/useRecentPlayedTracks"
+import Table from "../ui/Table"
 const Recent = () => {
-  const { data, isFetchingNextPage, fetchNextPage, isLoading, hasNextPage } =
+  const { tracks, isFetchingNextPage, fetchNextPage, isLoading, hasNextPage } =
     useRecentPlayedTracks()
 
-  console.log({ data, isLoading, isFetchingNextPage, hasNextPage })
+  // console.log({ data, isLoading, isFetchingNextPage, hasNextPage })
 
   return (
-    <div>
+    <>
+      <h1 className="pageHeading">Recently Played Tracks</h1>
+      <Table data={tracks?.length ? tracks : []} />
       <button
         onClick={() => {
           if (hasNextPage && !isLoading && !isFetchingNextPage) {
@@ -17,7 +20,7 @@ const Recent = () => {
       >
         Get
       </button>
-    </div>
+    </>
   )
 }
 
