@@ -1,5 +1,6 @@
 .navbar {
   height: 100vh;
+  color: var(--grey-1);
   &__logo {
     text-align: center;
   }
@@ -28,9 +29,9 @@
     text-decoration: none;
     padding: 1.5rem 0;
     &:hover,
-    &:visited,
     &:global(.active) {
       background-color: var(--secondary-black-color);
+      color: #fff;
     }
   }
   svg {

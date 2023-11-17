@@ -1,4 +1,5 @@
 export type TracksType = {
+  id: string
   name: string
   image: string
   album: string

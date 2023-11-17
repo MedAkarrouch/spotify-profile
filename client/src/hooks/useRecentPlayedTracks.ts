@@ -11,12 +11,14 @@ export const useRecentPlayedTracks = () => {
       getNextPageParam: (lastPage) => lastPage.next,
       initialPageParam: `${spotifyApi}/me/player/recently-played?limit=10`
     })
-  // console.log(data)
+  console.log(data)
   const tracks: TracksType[] = data?.pages.reduce((acc, curr) => {
     const items: TracksType[] = curr.items.map((item: any): TracksType => {
       const {
-        track: { name, duration_ms, artists, album }
+        played_at: platedAt,
+        track: { name, duration_ms, artists, album, id: trackId }
       } = item
+      const id = `${trackId}-${platedAt}`
       const performedBy: string = artists
         .map((artist: any) => artist.name)
         .join(", ")
@@ -31,7 +33,7 @@ export const useRecentPlayedTracks = () => {
           : images.length === 2
           ? images[1]
           : images[0]
-      return { name, duration, performedBy, album: album.name, image }
+      return { id, name, duration, performedBy, album: album.name, image }
     })
 
     return [...acc, ...items]

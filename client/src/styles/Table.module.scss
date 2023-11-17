@@ -1,28 +1,37 @@
 .table {
   margin: 0 auto;
-  margin-top: 5rem;
+  margin-top: 3rem;
   max-width: 100%;
-  color: #b3b3b3;
-  font-size: 1.2rem;
+  color: var(--grey-1);
+  font-size: 1.25rem;
 }
+
 .header,
 .row {
   display: grid;
-  grid-template-columns: 2rem 2fr 1fr 5rem;
+  // grid-template-columns: 2rem 2fr 1fr 5rem;
+  // grid-template-columns: 2rem 1fr 20rem 5rem;
+  grid-template-columns: 2rem 4rem 1.6fr 1fr 5rem;
   align-items: center;
   column-gap: 1.5rem;
   padding: 0 2rem;
-  // font-size: 1.32rem;
 }
 .header {
-  margin-bottom: 1rem;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: transparent;
+  margin-bottom: 1.5rem;
   border-bottom: 1px solid #333;
-  padding-bottom: 1rem;
-  // margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  padding-top: 1rem;
   span:last-child {
     justify-self: end;
     font-size: 1.6rem;
   }
+}
+.header.isSticky {
+  background-color: #1a1a1a;
 }
 .rows {
   display: flex;
@@ -42,20 +51,53 @@
 }
 
 .songNum {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
+  justify-self: start;
 }
+.song,
+.performedBy,
 .album {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.song {
+  align-self: start;
 }
 .performedBy {
+  align-self: end;
+}
+.performedBy,
+.song {
+  grid-column: 3/4;
+  grid-row: 1/2;
 }
 
 .song {
   color: #fff;
   font-size: 1.6rem;
 }
+
+.duration {
+  justify-self: end;
+}
+img {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 4px;
+  object-fit: cover;
+}
 .titleBox {
   display: flex;
   gap: 1rem;
+  // img {
+  //   display: block;
+  //   width: 4rem;
+  //   height: 4rem;
+  //   border-radius: 4px;
+  //   object-fit: cover;
+  // }
   img {
     display: block;
     width: 4rem;
