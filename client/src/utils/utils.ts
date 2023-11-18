@@ -1,3 +1,15 @@
+export const filters: { label: string; value: string }[] = [
+  { label: "This month", value: "short_term" },
+  {
+    label: "Last 6 months",
+    value: "medium_term"
+  },
+  {
+    label: "All time",
+    value: "long_term"
+  }
+]
+
 export const config = {
   headers: { "Content-Type": "application/json" },
   withCredentials: true

@@ -1,11 +1,19 @@
 import { useQuery } from "@tanstack/react-query"
-import { getArtists } from "../api/spotify"
+import { getTop } from "../api/spotify"
 import { ArtistType } from "../utils/Types"
+import { useSearchParams } from "react-router-dom"
+import { filters } from "../utils/utils"
 
 export const useArtists = () => {
+  const [searchParams] = useSearchParams()
+  let filterBy = searchParams.get("filterBy") || ""
+  filterBy = filters.map((el) => el.value).includes(filterBy)
+    ? filterBy
+    : filters[0].value
+
   const { isLoading, data } = useQuery({
-    queryKey: ["artists"],
-    queryFn: getArtists,
+    queryKey: ["artists", filterBy],
+    queryFn: () => getTop("artists", filterBy),
     retry: false
   })
   const artists: ArtistType[] =

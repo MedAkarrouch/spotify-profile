@@ -5,6 +5,7 @@ export type TrackType = {
   album: string
   performedBy: string
   duration: { minutes: number; seconds: number }
+  uri: string
 }
 export type ArtistType = {
   id: string
