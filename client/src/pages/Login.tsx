@@ -1,9 +1,9 @@
 import { motion } from "framer-motion"
-import styles from "../../styles/Login.module.scss"
-import { useLogin } from "./useLogin"
-import Logo from "../../components/Logo"
-import { useUser } from "./useUser"
-import Loader from "../../components/Loader"
+import styles from "../styles/Login.module.scss"
+import { useLogin } from "../hooks/useLogin"
+import Logo from "../icons/Logo"
+import { useUser } from "../hooks/useUser"
+import Loader from "../components/Loader"
 import { Navigate } from "react-router-dom"
 
 const Login = () => {

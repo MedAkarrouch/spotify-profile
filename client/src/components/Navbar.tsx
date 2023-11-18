@@ -1,9 +1,11 @@
 import styles from "../styles/Navbar.module.scss"
-import Logo from "./Logo"
-import { MdPerson } from "react-icons/md"
-import { MdOutlineClearAll } from "react-icons/md"
-import { MdHistory } from "react-icons/md"
+import Logo from "../icons/Logo"
 import NavLinkLine from "./NavLinkLine"
+import IconUser from "../icons/IconUser"
+import IconArtists from "../icons/IconArtists"
+import IconTracks from "../icons/IconTracks"
+import IconPlaylist from "../icons/IconPlaylist"
+import IconRecent from "../icons/IconRecent"
 
 const Navbar = () => {
   return (
@@ -14,19 +16,31 @@ const Navbar = () => {
       <ul className={styles.navlist}>
         <li>
           <NavLinkLine to="/profile" lineStyles={styles.line}>
-            <MdPerson />
+            <IconUser />
             <span>Profile</span>
           </NavLinkLine>
         </li>
         <li>
-          <NavLinkLine to="/library" lineStyles={styles.line}>
-            <MdOutlineClearAll />
-            <span>Library</span>
+          <NavLinkLine to="/artists" lineStyles={styles.line}>
+            <IconArtists />
+            <span>Top Artists</span>
+          </NavLinkLine>
+        </li>
+        <li>
+          <NavLinkLine to="/tracks" lineStyles={styles.line}>
+            <IconTracks />
+            <span>Top Tracks</span>
+          </NavLinkLine>
+        </li>
+        <li>
+          <NavLinkLine to="/playlists" lineStyles={styles.line}>
+            <IconPlaylist />
+            <span>Playlists</span>
           </NavLinkLine>
         </li>
         <li>
           <NavLinkLine to="/recent" lineStyles={styles.line}>
-            <MdHistory />
+            <IconRecent />
             <span>Recent</span>
           </NavLinkLine>
         </li>

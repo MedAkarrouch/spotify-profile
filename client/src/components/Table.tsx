@@ -9,12 +9,7 @@ const Table = ({ data }: { data: TracksType[] }) => {
   useEffect(() => {
     const handler = () => {
       if (headerRef.current === null) return
-      console.log(
-        "scrollY = ",
-        window.scrollY,
-        " offsetTop = ",
-        headerRef.current.offsetTop
-      )
+
       const threshold = 10
       // const isSticky = window.scrollY >= headerRef.current.offsetTop
       const isSticky = window.scrollY + threshold >= headerRef.current.offsetTop

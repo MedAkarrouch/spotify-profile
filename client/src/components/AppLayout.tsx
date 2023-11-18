@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom"
 import styles from "../styles/AppLayout.module.scss"
-import { useUser } from "../features/auth/useUser"
+import { useUser } from "../hooks/useUser"
 import Loader from "./Loader"
 import Navbar from "./Navbar"
 // import { useCode } from "../features/auth/useCode"

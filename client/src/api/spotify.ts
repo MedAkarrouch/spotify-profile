@@ -100,6 +100,21 @@ export const getFollowedArtists = async () => {
 }
 
 // Recent Played tracks
+// export const getRecentPlayedTracks = async () => {
+//   const token = getAccessToken()
+//   if (!token) return null
+
+//   try {
+//     const res = await axios.get(
+//       `${spotifyApi}/me/player/recently-played?limit=50`,
+//       getSpotifyApiConfig(token)
+//     )
+//     // console.log("Res = ", res)
+//     return res.data
+//   } catch {
+//     return null
+//   }
+// }
 export const getRecentPlayedTracks = async (pageUrl: string) => {
   const token = getAccessToken()
   if (!token) return null
@@ -107,6 +122,36 @@ export const getRecentPlayedTracks = async (pageUrl: string) => {
   try {
     const res = await axios.get(pageUrl, getSpotifyApiConfig(token))
     // console.log("Res = ", res)
+    return res.data
+  } catch {
+    return null
+  }
+}
+
+// Library
+
+export const getArtists = async () => {
+  const token = getAccessToken()
+  if (!token) return null
+  try {
+    const res = await axios.get(
+      `${spotifyApi}/me/top/artists?limit=50`,
+      getSpotifyApiConfig(token)
+    )
+    return res.data
+  } catch {
+    return null
+  }
+}
+
+export const getPlaylists = async () => {
+  const token = getAccessToken()
+  if (!token) return null
+  try {
+    const res = await axios.get(
+      `${spotifyApi}/me/playlists`,
+      getSpotifyApiConfig(token)
+    )
     return res.data
   } catch {
     return null

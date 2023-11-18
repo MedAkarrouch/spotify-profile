@@ -1,12 +1,13 @@
 import { useEffect } from "react"
 import { getRecentPlayedTracks } from "../api/spotify"
 import { useRecentPlayedTracks } from "../hooks/useRecentPlayedTracks"
-import Table from "../ui/Table"
+import Table from "../components/Table"
 const Recent = () => {
+  // const { tracks, isLoading } = useRecentPlayedTracks()
   const { tracks, isFetchingNextPage, fetchNextPage, isLoading, hasNextPage } =
     useRecentPlayedTracks()
 
-  // console.log({ data, isLoading, isFetchingNextPage, hasNextPage })
+  console.log({ isLoading, tracks })
   // useEffect(() => {
   //   // Add an event listener to the window's scroll event
   //   window.addEventListener("scroll", handler)
