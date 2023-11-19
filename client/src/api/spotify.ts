@@ -10,6 +10,7 @@ import {
   redirectURI,
   api
 } from "../utils/utils"
+import { ArtistType } from "../utils/Types"
 
 export const getAuthLink = async (): Promise<string> => {
   const verifier = generateCodeVerifier(128)

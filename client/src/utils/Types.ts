@@ -7,10 +7,17 @@ export type TrackType = {
   duration: { minutes: number; seconds: number }
   uri: string
 }
+
 export type ArtistType = {
   id: string
   name: string
   type: string
   image: string
   uri: string
+}
+export type PlaylistType = {
+  id: string
+  name: string
+  totalTracks: number
+  image: string | null
 }

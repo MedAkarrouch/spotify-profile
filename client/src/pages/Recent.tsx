@@ -3,14 +3,17 @@ import { getRecentPlayedTracks } from "../api/spotify"
 import { useRecentPlayedTracks } from "../hooks/useRecentPlayedTracks"
 import Table from "../components/Table"
 import MiniLoader from "../components/MiniLoader"
+import { useScrollTop } from "../hooks/useScrollTop"
 const Recent = () => {
   const { tracks, isLoading } = useRecentPlayedTracks()
-
+  useScrollTop()
   console.log({ isLoading, tracks })
 
   return (
     <>
-      <h1 className="pageHeading">Recently Played Tracks</h1>
+      <div className="pageHeader">
+        <h1 className="pageHeading">Recently Played Tracks</h1>
+      </div>
       {isLoading ? <MiniLoader /> : <Table data={tracks} />}
     </>
   )

@@ -5,6 +5,10 @@
   grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
   gap: 2rem;
   list-style: none;
+  @media screen and (max-width: 43.75em) {
+    padding: 0 1.5rem;
+  }
+
   // height: 30rem;
   // overflow: hidden;
   li {
@@ -27,12 +31,18 @@
     }
   }
 }
+.listPlaylists {
+  @media screen and (max-width: 43.75em) {
+    // grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  }
+}
 .imageContainer {
   display: flex;
   justify-content: center;
   // align-items: center;
   margin-bottom: 1.6rem;
-  img {
+  img,
+  svg {
     width: 17.6rem;
     height: 17.6rem;
     object-fit: cover;
@@ -40,6 +50,13 @@
     border-radius: 50%;
   }
 }
+.name,
+.type {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .name {
   font-size: 1.6rem;
   font-weight: 700;
@@ -51,4 +68,23 @@
   &::first-letter {
     text-transform: uppercase;
   }
+}
+//
+.playlistItem {
+  div {
+    height: 17.6rem;
+    align-items: center;
+  }
+
+  svg {
+    fill: var(--grey-1);
+    width: 5rem;
+    height: 5rem;
+    border-radius: unset;
+  }
+  img {
+    border-radius: 8px;
+  }
+}
+.artistItem {
 }

@@ -1,4 +1,3 @@
-import { useRef, useEffect, useState } from "react"
 import { useArtists } from "../hooks/useArtists"
 import styles from "../styles/ProfileArtists.module.scss"
 import { ArtistType } from "../utils/Types"

@@ -1,7 +1,12 @@
+import ArtistsPlaylistsList from "../components/ArtistsPlaylistsList"
 import FilterBy from "../components/FilterBy"
 import ProfileArtists from "../components/ProfileArtists"
+import { useArtists } from "../hooks/useArtists"
+import { useScrollTop } from "../hooks/useScrollTop"
 
 const Artists = () => {
+  const { isLoading, artists } = useArtists()
+  useScrollTop()
   return (
     <>
       <div className="pageHeader">
@@ -9,7 +14,12 @@ const Artists = () => {
         <FilterBy />
       </div>
 
-      <ProfileArtists />
+      {/* <ProfileArtists /> */}
+      <ArtistsPlaylistsList
+        data={artists}
+        isLoading={isLoading}
+        dataType="artists"
+      />
     </>
   )
 }
