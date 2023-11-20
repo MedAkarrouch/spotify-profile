@@ -1,0 +1,37 @@
+.header {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  img {
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+    // width: 23.2rem;
+    // height: 23.2rem;
+    width: 20rem;
+    height: 20rem;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    justify-content: flex-start;
+    font-size: 1.4rem;
+  }
+  &__playlistType {
+  }
+  &__playlistName {
+    font-size: 3rem;
+    font-weight: 900;
+  }
+  &__playlistInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    span:nth-child(2) {
+      font-weight: 900;
+    }
+  }
+}

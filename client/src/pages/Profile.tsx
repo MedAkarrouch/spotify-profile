@@ -8,7 +8,7 @@ const Profile = () => {
   return (
     <>
       <ProfileHeader />
-      <ProfileMain />
+      {/* <ProfileMain /> */}
     </>
   )
 }

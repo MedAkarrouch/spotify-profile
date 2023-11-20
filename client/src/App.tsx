@@ -8,6 +8,7 @@ import Recent from "./pages/Recent"
 import Profile from "./pages/Profile"
 import Artists from "./pages/Artists"
 import Tracks from "./pages/Tracks"
+import Playlist from "./pages/Playlist"
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/artists" element={<Artists />} />
           <Route path="/tracks" element={<Tracks />} />
           <Route path="/playlists" element={<Library />} />
+          <Route path="/playlists/:playlistId" element={<Playlist />} />
           <Route path="/recent" element={<Recent />} />
         </Route>
         <Route path="/login" element={<Login />} />

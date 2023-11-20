@@ -158,3 +158,42 @@ export const getPlaylists = async () => {
     return null
   }
 }
+export const getPlaylistTracks = async (page: string) => {
+  const token = getAccessToken()
+  if (!token) return null
+  try {
+    // const res = await axios.get(
+    //   `https://api.spotify.com/v1/playlists/${playlistId}`,
+    //   getSpotifyApiConfig(token)
+    // )
+    // const res = await axios.get(
+    //   "https://api.spotify.com/v1/playlists/5YBOnFZco0qKZMLM0B1lSV/tracks?offset=100&limit=100&locale=en-US,en;q=0.9",
+    //   getSpotifyApiConfig(token)
+    // )
+    const res = await axios.get(page, getSpotifyApiConfig(token))
+    return res.data
+  } catch {
+    return null
+  }
+}
+// export const getPlaylistTracks = async (playlistId: string) => {
+//   const token = getAccessToken()
+//   if (!token) return null
+//   try {
+//     // const res = await axios.get(
+//     //   `https://api.spotify.com/v1/playlists/${playlistId}`,
+//     //   getSpotifyApiConfig(token)
+//     // )
+//     // const res = await axios.get(
+//     //   "https://api.spotify.com/v1/playlists/5YBOnFZco0qKZMLM0B1lSV/tracks?offset=100&limit=100&locale=en-US,en;q=0.9",
+//     //   getSpotifyApiConfig(token)
+//     // )
+//     const res = await axios.get(
+//       `${spotifyApi}/playlists/${playlistId}`,
+//       getSpotifyApiConfig(token)
+//     )
+//     return res.data
+//   } catch {
+//     return null
+//   }
+// }

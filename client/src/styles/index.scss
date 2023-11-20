@@ -58,7 +58,7 @@ body {
   scroll-behavior: smooth;
 }
 #root {
-  min-height: 100vh;
+  min-height: 100dvh;
   &:has(nav) {
     display: grid;
     grid-template-columns: 10rem 1fr;
