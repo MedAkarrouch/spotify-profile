@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { getRecentPlayedTracks } from "../api/spotify"
-import { spotifyApi } from "../utils/utils"
+import { getImage, spotifyApi } from "../utils/utils"
 import { TrackType } from "../utils/Types"
 
 export const useRecentPlayedTracks = () => {
@@ -23,13 +23,7 @@ export const useRecentPlayedTracks = () => {
         minutes: new Date(duration_ms).getMinutes(),
         seconds: new Date(duration_ms).getSeconds()
       }
-      const images = album.images
-      const image =
-        images.length === 3
-          ? images[2].url
-          : images.length === 2
-          ? images[1]
-          : images[0]
+      const image = getImage(album.images, false)
       return { id, name, duration, performedBy, album: album.name, image, uri }
     }) || []
 

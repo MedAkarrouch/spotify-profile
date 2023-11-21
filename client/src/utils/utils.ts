@@ -1,3 +1,5 @@
+import { UserImageType } from "./Types"
+
 export const filters: { label: string; value: string }[] = [
   { label: "This month", value: "short_term" },
   {
@@ -48,4 +50,12 @@ export const generateCodeChallenge = async (
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
     .replace(/=+$/, "")
+}
+export const getImage = (
+  arr: UserImageType[],
+  wildest: boolean
+): null | string => {
+  if (!arr.length) return null
+  if (wildest) return arr[0].url
+  return arr[arr.length - 1].url
 }

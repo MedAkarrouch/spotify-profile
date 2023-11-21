@@ -162,16 +162,17 @@ export const getPlaylistTracks = async (page: string) => {
   const token = getAccessToken()
   if (!token) return null
   try {
-    // const res = await axios.get(
-    //   `https://api.spotify.com/v1/playlists/${playlistId}`,
-    //   getSpotifyApiConfig(token)
-    // )
-    // const res = await axios.get(
-    //   "https://api.spotify.com/v1/playlists/5YBOnFZco0qKZMLM0B1lSV/tracks?offset=100&limit=100&locale=en-US,en;q=0.9",
-    //   getSpotifyApiConfig(token)
-    // )
     const res = await axios.get(page, getSpotifyApiConfig(token))
-    return res.data
+    if (!res.data.owner) return res.data
+    const owner = await axios.get(
+      res.data.owner.href,
+      getSpotifyApiConfig(token)
+    )
+    // console.log("***")
+    // console.log("Data ", res.data)
+    // console.log("Owner ", owner)
+    // console.log("***")
+    return { ...res.data, owner: owner.data }
   } catch {
     return null
   }

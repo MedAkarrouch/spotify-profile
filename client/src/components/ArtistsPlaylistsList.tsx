@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import MiniLoader from "./MiniLoader"
 import IconTracks from "../icons/IconTracks"
 import { Link } from "react-router-dom"
+
 type ArtistData = {
   data: ArtistType[]
   dataType: "artists"
@@ -15,6 +16,7 @@ type PlaylistData = {
 type PropsType = {
   isLoading: boolean
 } & (ArtistData | PlaylistData)
+
 const ArtistsPlaylistsList = ({ isLoading, data, dataType }: PropsType) => {
   if (isLoading) return <MiniLoader />
   if (dataType === "artists")

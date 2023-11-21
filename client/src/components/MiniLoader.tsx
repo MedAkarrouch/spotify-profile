@@ -1,9 +1,13 @@
 import styles from "../styles/MiniLoader.module.scss"
 
-const MiniLoader = () => {
+const MiniLoader = ({ loaderType = "regular" }: { loaderType?: string }) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.loader}></div>
+    <div
+      className={`${styles.container} ${styles[`container--${loaderType}`]}`}
+    >
+      <div
+        className={`${styles.loader} ${styles[`loader--${loaderType}`]}`}
+      ></div>
     </div>
   )
 }

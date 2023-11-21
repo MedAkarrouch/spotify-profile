@@ -2,7 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 30dvh;
+  &--main {
+    height: calc(100vh - 12rem);
+  }
+  &--regular {
+    padding-top: 30dvh;
+  }
+  &--tracks {
+  }
 }
 .loader,
 .loader:before,
@@ -15,11 +22,17 @@
 }
 .loader {
   color: #fff;
-  font-size: 7px;
   position: relative;
   text-indent: -9999em;
   transform: translateZ(0);
   animation-delay: -0.16s;
+  &--regular,
+  &--main {
+    font-size: 7px;
+  }
+  &--tracks {
+    font-size: 4px;
+  }
 }
 .loader:before,
 .loader:after {

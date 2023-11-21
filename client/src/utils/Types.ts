@@ -21,3 +21,17 @@ export type PlaylistType = {
   totalTracks: number
   image: string | null
 }
+
+export type PlaylistTracksType = {
+  id: string
+  image: string | null
+  name: string | null
+  description: string | null
+  owner: { name: string; image: string | null }
+  songs: number
+}
+export type UserImageType = {
+  url: string
+  width: number | null
+  height: number | null
+}

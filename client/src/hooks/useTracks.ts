@@ -16,7 +16,7 @@ export const useTracks = () => {
     queryFn: () => getTop("tracks", filterBy),
     retry: false
   })
-  console.log("data = ", data)
+  // console.log("data = ", data)
   const tracks: TrackType[] =
     data?.items.map((item: any) => {
       const { name, uri, id, duration_ms, artists, album } = item

@@ -11,7 +11,7 @@ const ProfileHeader = () => {
     <header className={styles.header}>
       <img
         className={styles.img}
-        src={user.images[1].url}
+        src={user.images.length > 0 ? user.images[1].url : ""}
         alt={`Profile image of ${username}`}
       />
       <h1>{username}</h1>
