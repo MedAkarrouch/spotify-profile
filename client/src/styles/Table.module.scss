@@ -15,6 +15,10 @@
   align-items: center;
   column-gap: 1.5rem;
   padding: 0 2rem;
+  // 700 px
+  @media screen and (max-width: 43.75em) {
+    padding: 0 1.5rem;
+  }
 }
 .header {
   z-index: 10;
@@ -41,6 +45,10 @@
 }
 .row {
   padding: 1rem 2rem;
+  // 700 px
+  @media screen and (max-width: 43.75em) {
+    padding: 1rem 1.5rem;
+  }
   border-radius: 4px;
   position: relative;
   img {

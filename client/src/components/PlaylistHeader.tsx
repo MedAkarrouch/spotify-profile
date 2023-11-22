@@ -19,7 +19,7 @@ const PlaylistHeader = ({ playlist }: { playlist: PlaylistTracksType }) => {
         </div>
       )}
       <div className={styles.header__infoContainer}>
-        <p>Playlist</p>
+        <p className={styles.header__playlistType}>Playlist</p>
         <p className={styles.header__playlistName}>{name}</p>
         {description && (
           <p className={styles.header__description}>{description}</p>

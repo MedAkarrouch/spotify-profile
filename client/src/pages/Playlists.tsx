@@ -4,9 +4,9 @@ import { usePlaylists } from "../hooks/usePlaylists"
 import { useScrollTop } from "../hooks/useScrollTop"
 
 const Playlists = () => {
+  useScrollTop()
   const { isLoading, data, playlists } = usePlaylists()
   console.log(isLoading, data, playlists)
-  useScrollTop()
   return (
     <>
       <div className="pageHeader">

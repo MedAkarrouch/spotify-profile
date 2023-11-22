@@ -1,7 +1,8 @@
 .header {
   display: flex;
   gap: 3rem;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
+  // 700 px
   &__imgContainer {
     display: flex;
     align-items: center;
@@ -16,8 +17,8 @@
   }
   &__imgContainer,
   &__img {
-    width: 20rem;
-    height: 20rem;
+    width: 21rem;
+    height: 21rem;
     box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
   }
   &__img {
@@ -59,5 +60,23 @@
     display: flex;
     align-items: center;
     gap: 0.6rem;
+  }
+  @media screen and (max-width: 43.75em) {
+    padding: 0 1.5rem;
+    flex-direction: column;
+    align-items: center;
+    &__playlistName {
+      text-align: center;
+      font-weight: 700;
+
+      font-size: 2.5rem;
+    }
+    &__playlistType,
+    &__description {
+      display: none;
+    }
+    &__playlistInfo {
+      justify-content: center;
+    }
   }
 }

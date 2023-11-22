@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom"
 import MiniLoader from "../components/MiniLoader"
 import PlaylistHeader from "../components/PlaylistHeader"
-import Table from "../components/Table"
 import { usePlaylist } from "../hooks/usePlaylist"
 import GoBackBtn from "../components/GoBackBtn"
-import Loader from "../components/Loader"
 import PlaylistTracksTable from "../components/PlaylistTracksTable"
+import { useScrollTop } from "../hooks/useScrollTop"
 const Playlist = () => {
+  useScrollTop()
   const navigate = useNavigate()
   const {
     isLoading,

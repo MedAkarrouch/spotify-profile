@@ -8,7 +8,7 @@ export const useRecentPlayedTracks = () => {
     queryKey: ["recentPlayedTracks"],
     queryFn: getRecentPlayedTracks
   })
-  // console.log("Data = ", data)
+  console.log("Data = ", data)
   const tracks: TrackType[] =
     data?.items.map((item: any) => {
       const {
