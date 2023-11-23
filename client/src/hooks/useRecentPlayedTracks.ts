@@ -13,7 +13,15 @@ export const useRecentPlayedTracks = () => {
     data?.items.map((item: any) => {
       const {
         played_at: platedAt,
-        track: { name, duration_ms, artists, album, id: trackId, uri }
+        track: {
+          name,
+          duration_ms,
+          artists,
+          album,
+          id: trackId,
+          uri,
+          preview_url
+        }
       } = item
       const id = `${trackId}-${platedAt}`
       const performedBy: string = artists
@@ -24,7 +32,16 @@ export const useRecentPlayedTracks = () => {
         seconds: new Date(duration_ms).getSeconds()
       }
       const image = getImage(album.images, false)
-      return { id, name, duration, performedBy, album: album.name, image, uri }
+      return {
+        id,
+        name,
+        duration,
+        performedBy,
+        album: album.name,
+        image,
+        uri,
+        previewUrl: preview_url || ""
+      }
     }) || []
 
   return {

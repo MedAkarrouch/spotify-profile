@@ -15,6 +15,7 @@
     "axios": "^1.6.1",
     "framer-motion": "^10.16.5",
     "js-cookie": "^3.0.5",
+    "progressbar.js": "^1.1.1",
     "react": "^18.2.0",
     "react-audio-player": "^0.17.0",
     "react-circle-player": "^1.0.5",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
+    "@types/progressbar.js": "^1.1.7",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",

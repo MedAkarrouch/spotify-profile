@@ -2,7 +2,7 @@ import styles from "../styles/Table.module.scss"
 import { MdAccessTime } from "react-icons/md"
 import { TrackType } from "../utils/Types"
 import { AnimatePresence, motion, stagger } from "framer-motion"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useObserver } from "../hooks/useObserver"
 import {
   FetchNextPageOptions,

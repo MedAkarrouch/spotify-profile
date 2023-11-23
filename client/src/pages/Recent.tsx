@@ -14,7 +14,7 @@ const Recent = () => {
     <>
       <div className="pageHeader">
         <h1 className="pageHeading">Recently Played Tracks</h1>
-        <AudioPlayer />
+        {/* <AudioPlayer /> */}
       </div>
       {isLoading ? <MiniLoader /> : <Table data={tracks} />}
     </>

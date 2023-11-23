@@ -11,7 +11,8 @@
   display: grid;
   // grid-template-columns: 2rem 2fr 1fr 5rem;
   // grid-template-columns: 2rem 1fr 20rem 5rem;
-  grid-template-columns: 2rem 4rem 1.6fr 1fr 5rem;
+  // grid-template-columns: 2rem 4rem 1.6fr 1fr 5rem;
+  grid-template-columns: 2.5rem 4rem 1.6fr 1fr 5rem;
   align-items: center;
   column-gap: 1.5rem;
   padding: 0 2rem;
@@ -30,6 +31,9 @@
   border-bottom: 1px solid #333;
   padding-bottom: 0.5rem;
   padding-top: 1rem;
+  span:first-child {
+    justify-self: center;
+  }
   span:last-child {
     justify-self: end;
     font-size: 1.6rem;
@@ -45,6 +49,8 @@
 }
 .row {
   padding: 1rem 2rem;
+  cursor: pointer;
+
   // 700 px
   @media screen and (max-width: 43.75em) {
     padding: 1rem 1.5rem;
@@ -52,6 +58,7 @@
   border-radius: 4px;
   position: relative;
   img {
+    position: relative;
     display: block;
     width: 4rem;
     height: 4rem;
@@ -65,7 +72,12 @@
     width: 100%;
     height: 100%;
   }
-  &:hover {
+  // &:hover {
+  // background-color: #333;
+  // color: #fff;
+  // }
+  &:hover,
+  &--clicked {
     background-color: #333;
     color: #fff;
   }
@@ -73,11 +85,19 @@
     justify-self: end;
   }
 }
-
+// *************
 .songNum {
+  // Old
   font-size: 1.5rem;
   justify-self: start;
+  // New
+  justify-self: center;
+  svg {
+    fill: #fff;
+    font-size: 2rem;
+  }
 }
+// ******************
 .song,
 .performedBy,
 .album {
@@ -135,4 +155,36 @@
     flex-direction: column;
     justify-content: space-between;
   }
+}
+
+.circle {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background-image: conic-gradient(#fff 0%, transparent 0);
+}
+.row--clicked .inner {
+  background-color: #333;
+}
+.inner {
+  // special
+  // background-image: conic-gradient(#b5838d 25%, #ffcdb2 0);
+  //
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2rem;
+  height: 2rem;
+  background: var(--secondary-black-color);
+  // background: transparent;
+  border-radius: 50%;
+  // font-size: 1.85em;
+  // font-weight: 300;
+  // color: rgba(255, 255, 255, 0.75);
 }
