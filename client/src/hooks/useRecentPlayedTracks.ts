@@ -1,6 +1,6 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import { getRecentPlayedTracks } from "../api/spotify"
-import { getImage, spotifyApi } from "../utils/utils"
+import { getImage } from "../utils/utils"
 import { TrackType } from "../utils/Types"
 
 export const useRecentPlayedTracks = () => {
@@ -9,40 +9,41 @@ export const useRecentPlayedTracks = () => {
     queryFn: getRecentPlayedTracks
   })
   console.log("Data = ", data)
-  const tracks: TrackType[] =
-    data?.items.map((item: any) => {
-      const {
-        played_at: platedAt,
-        track: {
-          name,
-          duration_ms,
-          artists,
-          album,
-          id: trackId,
-          uri,
-          preview_url
+  const tracks: TrackType[] = Array.isArray(data?.items)
+    ? data.items.map((item: any) => {
+        const {
+          played_at: platedAt,
+          track: {
+            name,
+            duration_ms,
+            artists,
+            album,
+            id: trackId,
+            uri,
+            preview_url
+          }
+        } = item
+        const id = `${trackId}-${platedAt}`
+        const performedBy: string = artists
+          .map((artist: any) => artist.name)
+          .join(", ")
+        const duration = {
+          minutes: new Date(duration_ms).getMinutes(),
+          seconds: new Date(duration_ms).getSeconds()
         }
-      } = item
-      const id = `${trackId}-${platedAt}`
-      const performedBy: string = artists
-        .map((artist: any) => artist.name)
-        .join(", ")
-      const duration = {
-        minutes: new Date(duration_ms).getMinutes(),
-        seconds: new Date(duration_ms).getSeconds()
-      }
-      const image = getImage(album.images, false)
-      return {
-        id,
-        name,
-        duration,
-        performedBy,
-        album: album.name,
-        image,
-        uri,
-        previewUrl: preview_url || ""
-      }
-    }) || []
+        const image = getImage(album.images, false)
+        return {
+          id,
+          name,
+          duration,
+          performedBy,
+          album: album.name,
+          image,
+          uri,
+          previewUrl: preview_url || ""
+        }
+      })
+    : []
 
   return {
     data,
@@ -63,7 +64,15 @@ export const useRecentPlayedTracks = () => {
 //     const items: TrackType[] = curr.items.map((item: any): TrackType => {
 //       const {
 //         played_at: platedAt,
-//         track: { name, duration_ms, artists, album, id: trackId, uri }
+//         track: {
+//           name,
+//           duration_ms,
+//           artists,
+//           album,
+//           id: trackId,
+//           uri,
+//           preview_url
+//         }
 //       } = item
 //       const id = `${trackId}-${platedAt}`
 //       const performedBy: string = artists
@@ -73,14 +82,17 @@ export const useRecentPlayedTracks = () => {
 //         minutes: new Date(duration_ms).getMinutes(),
 //         seconds: new Date(duration_ms).getSeconds()
 //       }
-//       const images = album.images
-//       const image =
-//         images.length === 3
-//           ? images[2].url
-//           : images.length === 2
-//           ? images[1]
-//           : images[0]
-//       return { id, name, duration, performedBy, album: album.name, image, uri }
+//       const image = getImage(album.images, false)
+//       return {
+//         id,
+//         name,
+//         duration,
+//         performedBy,
+//         album: album.name,
+//         image,
+//         uri,
+//         previewUrl: preview_url || ""
+//       }
 //     })
 
 //     return [...acc, ...items]

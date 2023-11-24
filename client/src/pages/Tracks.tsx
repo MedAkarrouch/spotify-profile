@@ -17,7 +17,11 @@ const Tracks = () => {
         <h1>Top Tracks</h1>
         <FilterBy />
       </div>
-      {isLoading ? <MiniLoader /> : <Table key={filterBy} data={tracks} />}
+      {isLoading ? (
+        <MiniLoader />
+      ) : (
+        <Table onProfile={false} key={filterBy} data={tracks} />
+      )}
     </>
   )
 }

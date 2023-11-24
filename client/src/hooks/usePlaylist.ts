@@ -4,14 +4,12 @@ import { getPlaylistTracks } from "../api/spotify"
 import { PlaylistTracksType, TrackType } from "../utils/Types"
 import { getImage, spotifyApi } from "../utils/utils"
 
-const isValidData = (array: any): boolean => {
-  return (
-    array?.pages &&
-    array.pages.length &&
-    array.pages.length > 0 &&
-    array.pages[0] !== null
-  )
-}
+const isValidData = (array: any): boolean =>
+  Array.isArray(array?.pages) &&
+  array.pages.length > 0 &&
+  array?.pages.every((page: any) => page !== null)
+// array.pages[0] !== null
+
 export const usePlaylist = () => {
   const { playlistId } = useParams()
   const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
@@ -26,28 +24,6 @@ export const usePlaylist = () => {
       initialPageParam: `${spotifyApi}/playlists/${playlistId}`,
       retry: false
     })
-  // if (data?.pages?.length! > 0) {
-  //   const {
-  //     id,
-  //     name,
-  //     images,
-  //     tracks: { total: totalSongs },
-  //     public: isPublic,
-  //     owner: { display_name: owner },
-  //     followers: { total: totalFollowers }
-  //   } = data.pages[0]
-  //   const image = images.length > 0 ? images[0].url : null
-  //   playlist = {
-  //     id,
-  //     owner,
-  //     name,
-  //     image,
-  //     totalSongs,
-  //     isPublic,
-  //     totalFollowers
-  //   }
-  // }
-  // console.log(tracks)
   console.log("Data = ", data)
   let playlist: null | PlaylistTracksType = null
   if (isValidData(data)) {
@@ -60,11 +36,12 @@ export const usePlaylist = () => {
       owner: { display_name: ownerName, images: ownerImages }
     } = data!.pages[0]
 
-    const image = images.length > 0 ? images[0].url : null
+    const image = getImage(images, true)
+    // Array.isArray(images) && images.length > 0 ? images[0].url : null
 
     playlist = {
       id,
-      owner: { name: ownerName, image: getImage(ownerImages, false) },
+      owner: { name: ownerName, image: getImage(ownerImages, true) },
       description,
       name,
       image,
@@ -80,7 +57,7 @@ export const usePlaylist = () => {
 
   const tracks: TrackType[] = tracksArr.map((item: any): TrackType => {
     const {
-      track: { name, duration_ms, artists, album, id, uri }
+      track: { name, duration_ms, artists, album, id, uri, preview_url }
     } = item
     const performedBy: string = artists
       .map((artist: any) => artist.name)
@@ -89,14 +66,17 @@ export const usePlaylist = () => {
       minutes: new Date(duration_ms).getMinutes(),
       seconds: new Date(duration_ms).getSeconds()
     }
-    const images = album.images
-    const image =
-      images.length === 3
-        ? images[2].url
-        : images.length === 2
-        ? images[1].url
-        : images[0].url
-    return { id, name, duration, performedBy, album: album.name, image, uri }
+    const image = getImage(album.images, true)
+    return {
+      id,
+      name,
+      duration,
+      performedBy,
+      album: album.name,
+      image,
+      uri,
+      previewUrl: preview_url || ""
+    }
   })
   // console.log("Data = ", data)
   // console.log("Tracks = ", tracks)

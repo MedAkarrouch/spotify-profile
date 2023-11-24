@@ -8,20 +8,27 @@ import { Link } from "react-router-dom"
 type ArtistData = {
   data: ArtistType[]
   dataType: "artists"
+  onProfile: boolean
 }
 type PlaylistData = {
   data: PlaylistType[]
   dataType: "playlists"
+  onProfile: boolean
 }
 type PropsType = {
   isLoading: boolean
 } & (ArtistData | PlaylistData)
 
-const ArtistsPlaylistsList = ({ isLoading, data, dataType }: PropsType) => {
+const ArtistsPlaylistsList = ({
+  isLoading,
+  data,
+  dataType,
+  onProfile
+}: PropsType) => {
   if (isLoading) return <MiniLoader />
   if (dataType === "artists")
     return (
-      <ul className={styles.list}>
+      <ul className={`${styles.list} ${onProfile && styles.onProfile}`}>
         {data.map((artist: ArtistType) => (
           <motion.li
             initial={{ opacity: 0, y: -30 }}

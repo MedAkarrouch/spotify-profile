@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { getTop } from "../api/spotify"
 import { TrackType } from "../utils/Types"
 import { useSearchParams } from "react-router-dom"
-import { filters } from "../utils/utils"
+import { filters, getImage } from "../utils/utils"
 
 export const useTracks = () => {
   const [searchParams] = useSearchParams()
@@ -19,20 +19,23 @@ export const useTracks = () => {
   // console.log("data = ", data)
   const tracks: TrackType[] =
     data?.items.map((item: any) => {
-      const { name, uri, id, duration_ms, artists, album } = item
+      const { name, uri, id, duration_ms, artists, album, preview_url } = item
       const duration = {
         minutes: new Date(duration_ms).getMinutes(),
         seconds: new Date(duration_ms).getSeconds()
       }
-      const images = album.images
-      const image =
-        images.length === 3
-          ? images[2].url
-          : images.length === 2
-          ? images[1]
-          : images[0]
+      const image = getImage(album.images, false)
       const performedBy = artists.map((artist: any) => artist.name).join(", ")
-      return { id, name, duration, image, uri, performedBy, album: album.name }
+      return {
+        id,
+        name,
+        duration,
+        image,
+        uri,
+        performedBy,
+        album: album.name,
+        previewUrl: preview_url || ""
+      }
     }) || []
   return { isLoading, tracks }
 }

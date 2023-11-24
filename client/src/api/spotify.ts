@@ -145,25 +145,35 @@ export const getTop = async (type: "artists" | "tracks", filterBy: string) => {
   }
 }
 
-export const getPlaylists = async () => {
+export const getPlaylists = async (pageUrl: string) => {
   const token = getAccessToken()
   if (!token) return null
   try {
-    const res = await axios.get(
-      `${spotifyApi}/me/playlists?limit=50`,
-      getSpotifyApiConfig(token)
-    )
+    const res = await axios.get(pageUrl, getSpotifyApiConfig(token))
     return res.data
   } catch {
     return null
   }
 }
+// export const getPlaylists = async () => {
+//   const token = getAccessToken()
+//   if (!token) return null
+//   try {
+//     const res = await axios.get(
+//       `${spotifyApi}/me/playlists?limit=50`,
+//       getSpotifyApiConfig(token)
+//     )
+//     return res.data
+//   } catch {
+//     return null
+//   }
+// }
 export const getPlaylistTracks = async (page: string) => {
   const token = getAccessToken()
   if (!token) return null
   try {
     const res = await axios.get(page, getSpotifyApiConfig(token))
-    if (!res.data.owner) return res.data
+    if (!res.data?.owner) return res.data
     const owner = await axios.get(
       res.data.owner.href,
       getSpotifyApiConfig(token)
@@ -198,3 +208,6 @@ export const getPlaylistTracks = async (page: string) => {
 //     return null
 //   }
 // }
+
+// Logout
+export const logout = () => {}

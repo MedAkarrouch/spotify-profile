@@ -7,6 +7,7 @@ import { MdPlayArrow, MdOutlinePause } from "react-icons/md"
 
 type PropsType = {
   data: TrackType[]
+  onProfile: boolean
 }
 type AudioStateType = {
   isPlaying: boolean
@@ -84,7 +85,7 @@ const reducer = (
   }
 }
 
-const Table = ({ data }: PropsType) => {
+const Table = ({ data, onProfile }: PropsType) => {
   const headerRef = useRef<HTMLElement>(null!)
   const [hoveredRow, setHoveredRow] = useState<string | null>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
@@ -135,83 +136,85 @@ const Table = ({ data }: PropsType) => {
   const handleMouseOver = (id: string) => setHoveredRow(id)
   const handleMouseOut = () => setHoveredRow(null)
 
+  const tracks = onProfile ? data.slice(0, 5) : data
+
   return (
     <div role="table" className={styles.table}>
-      <header ref={headerRef} role="rowheader" className={styles.header}>
-        <span>#</span>
-        <span>Title</span>
-        <span></span>
-        <span>Album</span>
-        <span>
-          <MdAccessTime />
-        </span>
-      </header>
-      {data.length > 0 && (
-        <motion.div
-          variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1 }
-          }}
-          initial="hidden"
-          animate="visible"
-          role="rowgroup"
-          className={styles.rows}
-        >
-          <audio
-            style={{ display: "none" }}
-            ref={audioRef}
-            src={""}
-            onTimeUpdate={handleTimeUpdate}
-            onEnded={handleOnEnd}
-          />
-          {data.map((track, index) => (
-            <AnimatePresence key={track.id}>
-              <motion.div
-                layout
-                variants={{
-                  hidden: { opacity: 0, y: -30 },
-                  visible: { opacity: 1, y: 0 }
-                }}
-                exit={{ opacity: 0, y: 30 }}
-                transition={{ type: "spring" }}
-                className={`${styles.row}  ${
-                  track.id === state.clickedRow ? styles["row--clicked"] : ""
-                }`}
-                role="row"
-                onMouseOver={() => handleMouseOver(track.id)}
-                onMouseOut={handleMouseOut}
-                onClick={() => handleOnClick(track.id, track.previewUrl)}
-              >
-                <div className={styles.songNum}>
-                  {state.clickedRow === track.id ? (
-                    <div
-                      className={styles.circle}
-                      style={{
-                        backgroundImage: `conic-gradient(#fff ${state.currentTime}%, transparent 0)`
-                      }}
-                    >
-                      <div className={styles.inner}>
-                        {state.isPlaying ? <MdOutlinePause /> : <MdPlayArrow />}
-                      </div>
-                    </div>
-                  ) : hoveredRow === track.id ? (
-                    <MdPlayArrow />
-                  ) : (
-                    index + 1
-                  )}
-                </div>
-                <img src={track.image} />
-                <p className={styles.song}>{track.name}</p>
-                <p className={styles.performedBy}>{track.performedBy}</p>
-                <p className={styles.album}>{track.album}</p>
-                <p className={styles.duration}>{`${
-                  track.duration.minutes
-                }:${track.duration.seconds.toString().padStart(2, "0")}`}</p>
-              </motion.div>
-            </AnimatePresence>
-          ))}
-        </motion.div>
+      {!onProfile && (
+        <header ref={headerRef} role="rowheader" className={styles.header}>
+          <span>#</span>
+          <span>Title</span>
+          <span></span>
+          <span>Album</span>
+          <span>
+            <MdAccessTime />
+          </span>
+        </header>
       )}
+      <motion.div
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1 }
+        }}
+        initial="hidden"
+        animate="visible"
+        role="rowgroup"
+        className={styles.rows}
+      >
+        <audio
+          style={{ display: "none" }}
+          ref={audioRef}
+          src={""}
+          onTimeUpdate={handleTimeUpdate}
+          onEnded={handleOnEnd}
+        />
+        {tracks.map((track, index) => (
+          <AnimatePresence key={track.id}>
+            <motion.div
+              layout
+              variants={{
+                hidden: { opacity: 0, y: -30 },
+                visible: { opacity: 1, y: 0 }
+              }}
+              exit={{ opacity: 0, y: 30 }}
+              transition={{ type: "spring" }}
+              className={`${styles.row}  ${
+                track.id === state.clickedRow ? styles["row--clicked"] : ""
+              }`}
+              role="row"
+              onMouseOver={() => handleMouseOver(track.id)}
+              onMouseOut={handleMouseOut}
+              onClick={() => handleOnClick(track.id, track.previewUrl || "")}
+            >
+              <div className={styles.songNum}>
+                {state.clickedRow === track.id ? (
+                  <div
+                    className={styles.circle}
+                    style={{
+                      backgroundImage: `conic-gradient(#fff ${state.currentTime}%, transparent 0)`
+                    }}
+                  >
+                    <div className={styles.inner}>
+                      {state.isPlaying ? <MdOutlinePause /> : <MdPlayArrow />}
+                    </div>
+                  </div>
+                ) : hoveredRow === track.id ? (
+                  <MdPlayArrow />
+                ) : (
+                  index + 1
+                )}
+              </div>
+              <img src={track.image} />
+              <p className={styles.song}>{track.name}</p>
+              <p className={styles.performedBy}>{track.performedBy}</p>
+              <p className={styles.album}>{track.album}</p>
+              <p className={styles.duration}>{`${
+                track.duration.minutes
+              }:${track.duration.seconds.toString().padStart(2, "0")}`}</p>
+            </motion.div>
+          </AnimatePresence>
+        ))}
+      </motion.div>
     </div>
   )
 }

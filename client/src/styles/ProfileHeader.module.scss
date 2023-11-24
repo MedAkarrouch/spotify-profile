@@ -5,8 +5,8 @@
   gap: 3rem;
 }
 .img {
-  width: 15rem;
-  height: 15rem;
+  width: 23.2rem;
+  height: 23.2rem;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -32,4 +32,21 @@
   font-weight: 700;
   font-size: 1.8rem;
   color: var(--primary-green-color);
+}
+.btn {
+  margin-top: 2rem;
+  border-radius: 30px;
+  padding: 1.2rem 3rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: 700;
+  border: 1.5px solid #fff;
+  transition: all 0.3s ease;
+  &:hover {
+    color: var(--third-black-color);
+    background-color: #fff;
+  }
 }

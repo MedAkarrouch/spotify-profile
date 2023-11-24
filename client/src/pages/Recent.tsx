@@ -1,22 +1,24 @@
-import { useEffect } from "react"
-import { getRecentPlayedTracks } from "../api/spotify"
 import { useRecentPlayedTracks } from "../hooks/useRecentPlayedTracks"
 import Table from "../components/Table"
 import MiniLoader from "../components/MiniLoader"
 import { useScrollTop } from "../hooks/useScrollTop"
-import AudioPlayer from "../components/AudioPlayer"
+import NoAvailableData from "../components/NoAvailableData"
 const Recent = () => {
-  const { tracks, isLoading } = useRecentPlayedTracks()
   useScrollTop()
-  console.log({ isLoading, tracks })
+  const { tracks, isLoading } = useRecentPlayedTracks()
 
   return (
     <>
       <div className="pageHeader">
         <h1 className="pageHeading">Recently Played Tracks</h1>
-        {/* <AudioPlayer /> */}
       </div>
-      {isLoading ? <MiniLoader /> : <Table data={tracks} />}
+      {isLoading ? (
+        <MiniLoader />
+      ) : !tracks?.length ? (
+        <NoAvailableData ressourceName="Tracks" />
+      ) : (
+        <Table onProfile={false} data={tracks} />
+      )}
     </>
   )
 }

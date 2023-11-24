@@ -5,6 +5,7 @@ import { usePlaylist } from "../hooks/usePlaylist"
 import GoBackBtn from "../components/GoBackBtn"
 import PlaylistTracksTable from "../components/PlaylistTracksTable"
 import { useScrollTop } from "../hooks/useScrollTop"
+import NoAvailableData from "../components/NoAvailableData"
 const Playlist = () => {
   useScrollTop()
   const navigate = useNavigate()
@@ -27,19 +28,23 @@ const Playlist = () => {
   })
 
   if (isLoading) return <MiniLoader loaderType="main" />
-  if (!playlist) navigate("/pageNotFound", { replace: true })
+  if (!playlist) return navigate("/pageNotFound", { replace: true })
 
   return (
     <div>
       {/* Playlist */}
       <GoBackBtn />
       <PlaylistHeader playlist={playlist!} />
-      <PlaylistTracksTable
-        data={tracks}
-        hasNextPage={hasNextPage}
-        isFetchingNextPage={isFetchingNextPage}
-        fetchFn={fetchNextPage}
-      />
+      {!tracks?.length ? (
+        <NoAvailableData ressourceName="Tracks" />
+      ) : (
+        <PlaylistTracksTable
+          data={tracks}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+          fetchFn={fetchNextPage}
+        />
+      )}
     </div>
   )
 }

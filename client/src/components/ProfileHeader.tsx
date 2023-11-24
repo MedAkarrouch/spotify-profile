@@ -31,6 +31,7 @@ const ProfileHeader = () => {
           </div>
         </div>
       </div>
+      <button className={styles.btn}>Log out</button>
     </header>
   )
 }

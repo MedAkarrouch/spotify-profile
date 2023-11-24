@@ -1,22 +1,14 @@
-import ArtistsPlaylistsList from "../components/ArtistsPlaylistsList"
-import PlaylistItems from "../components/PlaylistItems"
-import { usePlaylists } from "../hooks/usePlaylists"
+import PlaylistsList from "../components/PlaylistsList"
 import { useScrollTop } from "../hooks/useScrollTop"
 
 const Playlists = () => {
   useScrollTop()
-  const { isLoading, data, playlists } = usePlaylists()
-  console.log(isLoading, data, playlists)
   return (
     <>
       <div className="pageHeader">
         <h1>Playlists</h1>
       </div>
-      <ArtistsPlaylistsList
-        isLoading={isLoading}
-        data={playlists}
-        dataType="playlists"
-      />
+      <PlaylistsList />
     </>
   )
 }

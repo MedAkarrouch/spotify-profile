@@ -54,6 +54,7 @@
   // 700 px
   @media screen and (max-width: 43.75em) {
     padding: 1rem 1.5rem;
+    border-radius: unset;
   }
   border-radius: 4px;
   position: relative;
@@ -98,6 +99,27 @@
   }
 }
 // ******************
+.row:hover .imgContainer,
+.row--clicked .imgContainer {
+  background-color: var(--secondary-black-color);
+}
+.imgContainer {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  // justify-content: flex-start;
+  transition: background-color 0.3s ease;
+  justify-content: center;
+  background-color: var(--grey-2);
+  border-radius: 4px;
+  svg {
+    z-index: 10;
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: var(--grey-1);
+  }
+}
 .song,
 .performedBy,
 .album {

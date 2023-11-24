@@ -1,7 +1,7 @@
 export type TrackType = {
   id: string
   name: string
-  image: string
+  image: string | null
   album: string
   performedBy: string
   duration: { minutes: number; seconds: number }

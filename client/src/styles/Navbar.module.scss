@@ -1,8 +1,8 @@
 .navbar {
+  z-index: 9000;
   color: var(--grey-1);
   // 700px
   height: 100dvh;
-  background-color: var(--primary-black-color);
   // color: var(--grey-1);
   position: sticky;
   left: 0;
@@ -14,6 +14,7 @@
   flex-direction: column;
   justify-items: center;
   gap: 5rem;
+  background-color: var(--primary-black-color);
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
   &__logo {
     text-align: center;
@@ -44,18 +45,22 @@
     padding: 1.5rem 0;
     gap: 0.8rem;
     // fill: var(--grey-1);
+    transition: color 0.3s ease;
     &:hover,
     &:global(.active) {
-      background-color: var(--secondary-black-color);
-      svg {
-        fill: #fff;
-      }
+      // background-color: var(--secondary-black-color);
+      // background-color: #101010;
+      color: #fff;
+      // svg {
+      //   fill: #fff;
+      // }
     }
   }
   svg {
     width: 2.25rem;
     height: 2.25rem;
-    fill: var(--grey-1);
+    fill: currentColor;
+    // fill: var(--grey-1);
     // fill: var(--primary-green-color);
   }
   span {
@@ -74,7 +79,7 @@
     padding: 0;
     grid-column: unset;
     // height: 10rem;
-    z-index: 90;
+    // z-index: 90;
     &__logo {
       display: none;
     }

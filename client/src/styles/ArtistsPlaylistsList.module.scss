@@ -6,8 +6,7 @@
   @media screen and (max-width: 43.75em) {
     padding: 0 1.5rem;
   }
-
-  li {
+  & li {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
       rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     border-radius: 8px;
@@ -44,6 +43,12 @@
     }
   }
 }
+// Profile
+.list.onProfile {
+  height: 28rem;
+  overflow: hidden;
+}
+// ********************************
 .listPlaylists {
   grid-template-columns: repeat(auto-fill, minmax(20.8rem, 1fr));
   // 500px

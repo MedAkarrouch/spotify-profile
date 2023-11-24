@@ -8,6 +8,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    background-color: var(--grey-2);
     svg {
       fill: var(--grey-1);
       display: flex;
@@ -40,6 +41,7 @@
     width: 2.4rem;
     height: 2.4rem;
     border-radius: 50%;
+    object-fit: cover;
   }
   &__description {
     color: var(--grey-1);

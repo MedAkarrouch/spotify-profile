@@ -10,6 +10,7 @@ import {
   InfiniteQueryObserverResult
 } from "@tanstack/react-query"
 import MiniLoader from "./MiniLoader"
+import IconTracks from "../icons/IconTracks"
 type PropsType = {
   data: TrackType[]
   isFetchingNextPage: boolean
@@ -96,7 +97,13 @@ const Table = ({
                 ref={index === data.length - 1 ? lastItemRef : undefined}
               >
                 <p className={styles.songNum}>{index + 1}</p>
-                <img src={track.image} />
+                {track.image ? (
+                  <img src={track.image} />
+                ) : (
+                  <div className={styles.imgContainer}>
+                    <IconTracks />
+                  </div>
+                )}
                 <p className={styles.song}>{track.name}</p>
                 <p className={styles.performedBy}>{track.performedBy}</p>
                 <p className={styles.album}>{track.album}</p>

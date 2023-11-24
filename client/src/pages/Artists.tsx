@@ -16,6 +16,7 @@ const Artists = () => {
 
       {/* <ProfileArtists /> */}
       <ArtistsPlaylistsList
+        onProfile={false}
         data={artists}
         isLoading={isLoading}
         dataType="artists"
