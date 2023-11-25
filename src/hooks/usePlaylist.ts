@@ -24,7 +24,7 @@ export const usePlaylist = () => {
       initialPageParam: `${spotifyApi}/playlists/${playlistId}`,
       retry: false
     })
-  console.log("Data = ", data)
+  // console.log("Data = ", data)
   let playlist: null | PlaylistTracksType = null
   if (isValidData(data)) {
     const {

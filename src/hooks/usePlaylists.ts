@@ -32,8 +32,8 @@ export const usePlaylists = () => {
     return { id, name, totalTracks: tracks.total, image }
   })
   // const totalPlaylists : number = isValidData(data) ?
-  console.log("Data = ", data)
-  console.log("Playlists = ", playlists)
+  // console.log("Data = ", data)
+  // console.log("Playlists = ", playlists)
 
   return {
     totalPlaylists,

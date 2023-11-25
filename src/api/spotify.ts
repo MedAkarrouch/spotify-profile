@@ -10,7 +10,7 @@ import {
   redirectURI
 } from "../utils/utils"
 
-export const logout = () => deleteToken("accessToken")
+export const logout = async () => deleteToken("accessToken")
 
 export const getAuthLink = async (): Promise<string> => {
   const verifier = generateCodeVerifier(128)

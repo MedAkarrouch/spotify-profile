@@ -10,7 +10,7 @@ const Tracks = () => {
   const [searchParams] = useSearchParams()
   const filterBy = searchParams.get("filterBy") || ""
   const { isLoading, tracks } = useTracks()
-  console.log({ isLoading, tracks })
+  // console.log({ isLoading, tracks })
   useScrollTop()
   return (
     <>

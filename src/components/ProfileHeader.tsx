@@ -1,3 +1,4 @@
+import { useLogout } from "../hooks/useLogout"
 import { useUser } from "../hooks/useUser"
 import IconUser from "../icons/IconUser"
 import styles from "../styles/ProfileHeader.module.scss"
@@ -7,8 +8,9 @@ type PropsType = {
 }
 
 const ProfileHeader = ({ following, totalPlaylists }: PropsType) => {
-  const { user } = useUser()
+  const { user = {} } = useUser()
   const { display_name: username, followers, images } = user
+  const { logout } = useLogout()
 
   return (
     <header className={styles.header}>
@@ -40,7 +42,9 @@ const ProfileHeader = ({ following, totalPlaylists }: PropsType) => {
           </div>
         </div>
       </div>
-      <button className={styles.btn}>Log out</button>
+      <button onClick={() => logout()} className={styles.btn}>
+        Log out
+      </button>
     </header>
   )
 }
