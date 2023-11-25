@@ -27,26 +27,27 @@ const Profile = () => {
   return (
     <>
       <ProfileHeader following={following} totalPlaylists={totalPlaylists} />
-
-      {artists?.length > 0 && (
-        <>
-          <div className={styles.header}>
-            <h2>Top artists this month</h2>
-            <Link to="/artists">Show all</Link>
+      <div className={styles.container}>
+        {artists?.length > 0 && (
+          <div>
+            <div className={styles.header}>
+              <h2>Top artists this month</h2>
+              <Link to="/artists">Show all</Link>
+            </div>
+            <ArtistsList onProfile={true} data={artists} />
           </div>
-          <ArtistsList onProfile={true} data={artists} />
-        </>
-      )}
+        )}
 
-      {tracks?.length > 0 && (
-        <>
-          <div className={styles.header}>
-            <h2>Top tracks this month</h2>
-            <Link to="/tracks">Show all</Link>
+        {tracks?.length > 0 && (
+          <div>
+            <div className={styles.header}>
+              <h2>Top tracks this month</h2>
+              <Link to="/tracks">Show all</Link>
+            </div>
+            <Table onProfile={true} data={tracks} />
           </div>
-          <Table onProfile={true} data={tracks} />
-        </>
-      )}
+        )}
+      </div>
     </>
   )
 }

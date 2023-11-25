@@ -18,21 +18,5 @@ const AppLayout = () => {
     </>
   )
 }
-// const AppLayout = () => {
-//   const { isAuthenticated, isLoading } = useUser()
-//   const location = useLocation()
-//   console.log({ isAuthenticated, isLoading })
-//   if (location.pathname !== "/login" && !isAuthenticated && !isLoading)
-//     return <Navigate replace to="/login" />
-//   if (location.pathname === "/login" && isAuthenticated && !isLoading)
-//     return <Navigate replace to="/" />
-//   if (isLoading) return <Loader />
-//   return (
-//     <main className={styles.main}>
-//       <Navbar />
-//       <Outlet />
-//     </main>
-//   )
-// }
 
 export default AppLayout

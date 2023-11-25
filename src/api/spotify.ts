@@ -7,10 +7,10 @@ import {
   generateCodeChallenge,
   generateCodeVerifier,
   getSpotifyApiConfig,
-  redirectURI,
-  api
+  redirectURI
 } from "../utils/utils"
-import { ArtistType } from "../utils/Types"
+
+export const logout = () => deleteToken("accessToken")
 
 export const getAuthLink = async (): Promise<string> => {
   const verifier = generateCodeVerifier(128)
@@ -47,14 +47,14 @@ export const setTokens = async (code: string): Promise<void> => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" }
     }
   )
-  const { access_token, refresh_token, expires_in } = result.data
+  const { access_token, expires_in } = result.data
   const expirationDate = new Date(Date.now() + expires_in * 1000)
   Cookies.set("accessToken", access_token, {
     expires: expirationDate
   })
-  Cookies.set("refreshToken", refresh_token, {
-    expires: expirationDate
-  })
+  // Cookies.set("refreshToken", refresh_token, {
+  //   expires: expirationDate
+  // })
 }
 
 export const getMe = async (code: string | null) => {
@@ -83,7 +83,10 @@ const getToken = (token: string): string | null => {
   else return tokenVal
 }
 export const getAccessToken = () => getToken("accessToken")
-export const getRefreshToken = () => getToken("refreshToken")
+// export const getRefreshToken = () => getToken("refreshToken")
+
+const deleteToken = (token: "accessToken" | "refreshToken"): void =>
+  Cookies.remove(token)
 
 //Profile
 export const getFollowedArtists = async () => {
@@ -208,9 +211,6 @@ export const getPlaylistTracks = async (page: string) => {
 //     return null
 //   }
 // }
-
-// Logout
-export const logout = () => {}
 
 export const getFollowing = async () => {
   const token = getAccessToken()

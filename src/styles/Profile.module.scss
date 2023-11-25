@@ -1,8 +1,13 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  margin-top: 6rem;
+}
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 6rem;
   margin-bottom: 3rem;
   // 700 px
   @media screen and (max-width: 43.75em) {
