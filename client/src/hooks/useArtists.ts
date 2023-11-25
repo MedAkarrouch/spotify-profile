@@ -16,11 +16,13 @@ export const useArtists = () => {
     queryFn: () => getTop("artists", filterBy),
     retry: false
   })
-  const artists: ArtistType[] =
-    data?.items.map((item: any) => {
-      const { type, name, images, uri, id } = item
-      const image = images[0].url
-      return { id, type, name, image, uri }
-    }) || []
+  const artists: ArtistType[] = Array.isArray(data?.items)
+    ? data.items.map((item: any) => {
+        const { type, name, images, uri, id } = item
+        const image =
+          Array.isArray(images) && images.length > 0 ? images[0].url : null
+        return { id, type, name, image, uri }
+      })
+    : []
   return { isLoading, data, artists }
 }

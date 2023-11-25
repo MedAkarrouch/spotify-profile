@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import MiniLoader from "../components/MiniLoader"
 import PlaylistHeader from "../components/PlaylistHeader"
 import { usePlaylist } from "../hooks/usePlaylist"
@@ -6,6 +6,7 @@ import GoBackBtn from "../components/GoBackBtn"
 import PlaylistTracksTable from "../components/PlaylistTracksTable"
 import { useScrollTop } from "../hooks/useScrollTop"
 import NoAvailableData from "../components/NoAvailableData"
+
 const Playlist = () => {
   useScrollTop()
   const navigate = useNavigate()
@@ -14,27 +15,18 @@ const Playlist = () => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-    data,
     playlist,
     tracks
   } = usePlaylist()
-  console.log({
-    isLoading,
-    isFetchingNextPage,
-    hasNextPage,
-    data,
-    playlist,
-    tracks
-  })
 
   if (isLoading) return <MiniLoader loaderType="main" />
-  if (!playlist) return navigate("/pageNotFound", { replace: true })
+  if (!playlist) return <Navigate to="/pageNotFound" />
 
   return (
     <div>
       {/* Playlist */}
       <GoBackBtn />
-      <PlaylistHeader playlist={playlist!} />
+      <PlaylistHeader playlist={playlist} />
       {!tracks?.length ? (
         <NoAvailableData ressourceName="Tracks" />
       ) : (

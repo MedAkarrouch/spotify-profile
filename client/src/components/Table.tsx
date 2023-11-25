@@ -1,9 +1,10 @@
 import styles from "../styles/Table.module.scss"
 import { MdAccessTime } from "react-icons/md"
 import { TrackType } from "../utils/Types"
-import { AnimatePresence, motion, stagger } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { RefObject, useEffect, useReducer, useRef, useState } from "react"
 import { MdPlayArrow, MdOutlinePause } from "react-icons/md"
+import IconTracks from "../icons/IconTracks"
 
 type PropsType = {
   data: TrackType[]
@@ -204,7 +205,13 @@ const Table = ({ data, onProfile }: PropsType) => {
                   index + 1
                 )}
               </div>
-              <img src={track.image} />
+              {track.image ? (
+                <img src={track.image} />
+              ) : (
+                <div className={styles.imgContainer}>
+                  <IconTracks />
+                </div>
+              )}
               <p className={styles.song}>{track.name}</p>
               <p className={styles.performedBy}>{track.performedBy}</p>
               <p className={styles.album}>{track.album}</p>

@@ -1,35 +1,52 @@
 import styles from "../styles/Profile.module.scss"
 import ProfileHeader from "../components/ProfileHeader"
 import { useScrollTop } from "../hooks/useScrollTop"
-import ArtistsPlaylistsList from "../components/ArtistsPlaylistsList"
+import ArtistsList from "../components/ArtistsList"
 import { Link } from "react-router-dom"
 import { useArtists } from "../hooks/useArtists"
 import Table from "../components/Table"
 import { useTracks } from "../hooks/useTracks"
+import { useFollowing } from "../hooks/useFollowing"
+import { usePlaylists } from "../hooks/usePlaylists"
+import MiniLoader from "../components/MiniLoader"
 
 const Profile = () => {
+  useScrollTop()
+  const { isLoading: isLoadingFollowing, following } = useFollowing()
+  const { isLoading: isLoadingPlaylists, totalPlaylists } = usePlaylists()
   const { isLoading: isLoadingArtists, artists } = useArtists()
   const { isLoading: isLoadingTracks, tracks } = useTracks()
-  useScrollTop()
+  const isLoading =
+    isLoadingArtists ||
+    isLoadingTracks ||
+    isLoadingFollowing ||
+    isLoadingPlaylists
+
+  if (isLoading) return <MiniLoader loaderType="main" />
+
   return (
     <>
-      <ProfileHeader />
-      <div className={styles.header}>
-        <h2>Top artists this month</h2>
-        <Link to="/artists">Show all</Link>
-      </div>
+      <ProfileHeader following={following} totalPlaylists={totalPlaylists} />
 
-      <ArtistsPlaylistsList
-        onProfile={true}
-        isLoading={isLoadingArtists}
-        data={artists}
-        dataType="artists"
-      />
-      <div className={styles.header}>
-        <h2>Top tracks this month</h2>
-        <Link to="/tracks">Show all</Link>
-      </div>
-      <Table onProfile={true} data={tracks} />
+      {artists?.length > 0 && (
+        <>
+          <div className={styles.header}>
+            <h2>Top artists this month</h2>
+            <Link to="/artists">Show all</Link>
+          </div>
+          <ArtistsList onProfile={true} data={artists} />
+        </>
+      )}
+
+      {tracks?.length > 0 && (
+        <>
+          <div className={styles.header}>
+            <h2>Top tracks this month</h2>
+            <Link to="/tracks">Show all</Link>
+          </div>
+          <Table onProfile={true} data={tracks} />
+        </>
+      )}
     </>
   )
 }

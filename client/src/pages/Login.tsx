@@ -1,16 +1,16 @@
-import { motion } from "framer-motion"
 import styles from "../styles/Login.module.scss"
 import { useLogin } from "../hooks/useLogin"
 import Logo from "../icons/Logo"
 import { useUser } from "../hooks/useUser"
-import Loader from "../components/Loader"
 import { Navigate } from "react-router-dom"
+import MiniLoader from "../components/MiniLoader"
 
 const Login = () => {
-  const { isAuthenticated, isLoading: isLoading1 } = useUser()
-  const { login, isLoading: isLoading2 } = useLogin()
-  const isLoading = isLoading1 || isLoading2
-  if (isLoading1) return <Loader />
+  const { isAuthenticated, isLoading } = useUser()
+  const { login } = useLogin()
+
+  if (isLoading) return <MiniLoader loaderType="full" />
+
   if (isAuthenticated) return <Navigate replace to="/" />
 
   return (

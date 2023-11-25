@@ -211,3 +211,17 @@ export const getPlaylistTracks = async (page: string) => {
 
 // Logout
 export const logout = () => {}
+
+export const getFollowing = async () => {
+  const token = getAccessToken()
+  if (!token) return
+  try {
+    const res = await axios.get(
+      `${spotifyApi}/me/following?type=artist&limit=1`,
+      getSpotifyApiConfig(token)
+    )
+    return res?.data?.artists
+  } catch {
+    return null
+  }
+}

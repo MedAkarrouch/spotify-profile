@@ -38,10 +38,13 @@ export const usePlaylist = () => {
 
     const image = getImage(images, true)
     // Array.isArray(images) && images.length > 0 ? images[0].url : null
+    const ownerImg = Array.isArray(ownerImages)
+      ? getImage(ownerImages, true)
+      : null
 
     playlist = {
       id,
-      owner: { name: ownerName, image: getImage(ownerImages, true) },
+      owner: { name: ownerName, image: ownerImg },
       description,
       name,
       image,
@@ -66,7 +69,7 @@ export const usePlaylist = () => {
       minutes: new Date(duration_ms).getMinutes(),
       seconds: new Date(duration_ms).getSeconds()
     }
-    const image = getImage(album.images, true)
+    const image = getImage(album.images, false)
     return {
       id,
       name,

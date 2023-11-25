@@ -5,11 +5,31 @@
   gap: 3rem;
 }
 .img {
-  width: 23.2rem;
-  height: 23.2rem;
-  border-radius: 50%;
+  // width: 23.2rem;
+  // height: 23.2rem;
+  // border-radius: 50%;
   object-fit: cover;
 }
+.img,
+.imgContainer {
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+}
+
+.imgContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  svg {
+    display: block;
+    fill: #fff;
+    width: 11rem;
+    height: 11rem;
+  }
+}
+
 .infoContainer {
   display: flex;
   gap: 4rem;

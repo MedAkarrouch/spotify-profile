@@ -2,6 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  &--full {
+    height: 100vh;
+  }
   &--main {
     height: calc(100vh - 12rem);
   }
@@ -9,6 +12,13 @@
     padding-top: 30dvh;
   }
   &--tracks {
+  }
+  // 700 px
+  @media screen and (max-width: 43.75em) {
+    &--main {
+      // padding: 3rem 0 10rem 0;
+      height: calc(100vh - 13rem);
+    }
   }
 }
 .loader,
@@ -26,12 +36,9 @@
   text-indent: -9999em;
   transform: translateZ(0);
   animation-delay: -0.16s;
-  &--regular,
-  &--main {
-    font-size: 7px;
-  }
+  font-size: 0.5rem;
   &--tracks {
-    font-size: 4px;
+    font-size: 0.3rem;
   }
 }
 .loader:before,

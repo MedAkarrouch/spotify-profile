@@ -20,6 +20,8 @@ export const usePlaylists = () => {
       retry: false
     })
 
+  const totalPlaylists = isValidData(data) ? data?.pages[0]?.total : 0
+
   const items = isValidData(data)
     ? data!.pages.reduce((acc, p) => [...acc, ...p.items], [])
     : []
@@ -29,10 +31,12 @@ export const usePlaylists = () => {
     const image = getImage(images, true)
     return { id, name, totalTracks: tracks.total, image }
   })
+  // const totalPlaylists : number = isValidData(data) ?
   console.log("Data = ", data)
   console.log("Playlists = ", playlists)
 
   return {
+    totalPlaylists,
     data,
     playlists,
     isFetchingNextPage,

@@ -1,6 +1,7 @@
-import ArtistsPlaylistsList from "../components/ArtistsPlaylistsList"
+import ArtistsPlaylistsList from "../components/ArtistsList"
 import FilterBy from "../components/FilterBy"
-import ProfileArtists from "../components/ProfileArtists"
+import MiniLoader from "../components/MiniLoader"
+import NoAvailableData from "../components/NoAvailableData"
 import { useArtists } from "../hooks/useArtists"
 import { useScrollTop } from "../hooks/useScrollTop"
 
@@ -13,14 +14,13 @@ const Artists = () => {
         <h1>Top Artists</h1>
         <FilterBy />
       </div>
-
-      {/* <ProfileArtists /> */}
-      <ArtistsPlaylistsList
-        onProfile={false}
-        data={artists}
-        isLoading={isLoading}
-        dataType="artists"
-      />
+      {isLoading ? (
+        <MiniLoader />
+      ) : !artists?.length ? (
+        <NoAvailableData ressourceName="Artists" />
+      ) : (
+        <ArtistsPlaylistsList onProfile={false} data={artists} />
+      )}
     </>
   )
 }

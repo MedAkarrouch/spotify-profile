@@ -12,8 +12,8 @@ export type TrackType = {
 export type ArtistType = {
   id: string
   name: string
-  type: string
-  image: string
+  type: "artist"
+  image: string | null
   uri: string
 }
 export type PlaylistType = {
