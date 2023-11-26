@@ -50,8 +50,15 @@ export const setTokens = async (code: string): Promise<void> => {
   const { access_token, expires_in } = result.data
   const expirationDate = new Date(Date.now() + expires_in * 1000)
   Cookies.set("accessToken", access_token, {
-    expires: expirationDate
+    expires: expirationDate,
+    secure: true,
+    sameSite: "Strict"
   })
+  // Dev
+  // Cookies.set("accessToken", access_token, {
+  //   expires: expirationDate
+  // })
+  // ***
   // Cookies.set("refreshToken", refresh_token, {
   //   expires: expirationDate
   // })

@@ -16,7 +16,7 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <Logo />
-      <h1>Spotify Profile</h1>
+      <h1>Profile Spotify</h1>
       <button onClick={() => login()}>Login to spotify</button>
     </div>
   )

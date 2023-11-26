@@ -1,4 +1,4 @@
-import { Navigate, useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import MiniLoader from "../components/MiniLoader"
 import PlaylistHeader from "../components/PlaylistHeader"
 import { usePlaylist } from "../hooks/usePlaylist"
@@ -9,7 +9,7 @@ import NoAvailableData from "../components/NoAvailableData"
 
 const Playlist = () => {
   useScrollTop()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const {
     isLoading,
     isFetchingNextPage,

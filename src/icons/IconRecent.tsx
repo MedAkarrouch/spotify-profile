@@ -1,5 +1,3 @@
-import React from "react"
-
 const IconRecent = () => {
   return (
     <svg

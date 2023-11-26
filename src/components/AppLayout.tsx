@@ -1,9 +1,8 @@
-import { Outlet, Navigate, useNavigate } from "react-router-dom"
+import { Outlet, Navigate } from "react-router-dom"
 import styles from "../styles/AppLayout.module.scss"
 import { useUser } from "../hooks/useUser"
 import Navbar from "./Navbar"
 import MiniLoader from "./MiniLoader"
-import { useEffect } from "react"
 
 const AppLayout = () => {
   // const navigate = useNavigate()
