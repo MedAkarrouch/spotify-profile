@@ -24,8 +24,6 @@ The Profile Spotify App is built using the following technologies and tools:
 
 ## Features
 
-**Key Features:**
-
 1. **Profile Overview:**
 
    - Overview of the user's profile, including the total number of followers, following and playlists, it also includes a short list of the user's top tracks and artists.
